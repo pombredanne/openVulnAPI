@@ -2,6 +2,7 @@ import requests
 
 import config
 
+
 def get_oauth_token(client_id, client_secret):
     """Get OAuth2 token from api based on client id and secret.
 
@@ -16,7 +17,8 @@ def get_oauth_token(client_id, client_secret):
     """
 
     payload = {'client_id': client_id, 'client_secret': client_secret}
-    r = requests.post(config.REQUEST_TOKEN_URL, params = payload)
+    data = {'grant_type': 'client_credentials'}
+    r = requests.post(config.REQUEST_TOKEN_URL, params=payload, data=data)
     r.raise_for_status()
     resp = r.json()
     return resp['access_token']
